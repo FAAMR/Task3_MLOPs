@@ -4,12 +4,12 @@ stages:
     deps:
       - preprocess.py
     outs:
-      - data/preprocessed_churn.csv
+      - data/preprocessed_titanic.csv
 
   train:
     cmd: python train.py
     deps:
       - train.py
-      - data/preprocessed_churn.csv
+      - data/preprocessed_titanic.csv
     outs:
       - model.joblib

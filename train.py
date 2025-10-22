@@ -5,14 +5,17 @@ from sklearn.metrics import accuracy_score, roc_auc_score
 import mlflow
 import joblib  # Used for saving and loading scikit-learn models
 
-mlflow.set_experiment("Telco Churn Prediction")
+mlflow.set_experiment("Titanic Survival Prediction")
 
-df = pd.read_csv('data/preprocessed_churn.csv')
-X = df.drop('Churn', axis=1)
-y = df['Churn']
+# Load preprocessed Titanic data
+df = pd.read_csv('data/preprocessed_titanic.csv')
+X = df.drop('Survived', axis=1)
+y = df['Survived']
 
+# Split data into train and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
+# Train and log model with MLflow
 with mlflow.start_run(run_name="Logistic Regression Baseline"):
     mlflow.set_tag("model_type", "Logistic Regression")
     params = {"solver": "liblinear", "random_state": 42}
@@ -30,3 +33,5 @@ with mlflow.start_run(run_name="Logistic Regression Baseline"):
     # Save the model using joblib
     joblib.dump(lr, "model.joblib")
     mlflow.log_artifact("model.joblib")
+
+print(f"Model training complete. Accuracy: {accuracy:.4f}, AUC: {auc:.4f}")
