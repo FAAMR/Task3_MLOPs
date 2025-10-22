@@ -1,12 +1,15 @@
 stages:
-preprocess:
-cmd: python preprocess.py
-deps:
-- preprocess.py
-outs:
-- data/preprocessed_churn.csv
-train:
-cmd: python train.py
-deps:
-- train.py
-- data/preprocessed_churn.csv
+  preprocess:
+    cmd: python preprocess.py
+    deps:
+      - preprocess.py
+    outs:
+      - data/preprocessed_churn.csv
+
+  train:
+    cmd: python train.py
+    deps:
+      - train.py
+      - data/preprocessed_churn.csv
+    outs:
+      - model.joblib
