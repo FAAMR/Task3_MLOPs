@@ -1,6 +1,8 @@
 import pandas as pd
 import sys
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # URL for the Titanic dataset (raw CSV from GitHub)
 url = 'https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv'

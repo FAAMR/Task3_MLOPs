@@ -11,5 +11,21 @@ stages:
     deps:
       - train.py
       - data/preprocessed_titanic.csv
-    outs:
-      - model.joblib
+
+  train_xgb:
+    cmd: python train_autolog_xgb.py
+    deps:
+      - train_autolog_xgb.py
+      - data/preprocessed_titanic.csv
+
+  train_lgbm:
+    cmd: python train_autolog_lgbm.py
+    deps:
+      - train_autolog_lgbm.py
+      - data/preprocessed_titanic.csv
+
+  tune:
+    cmd: python tune.py
+    deps:
+      - tune.py
+      - data/preprocessed_titanic.csv
